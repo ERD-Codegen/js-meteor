@@ -15,9 +15,43 @@ For more information on how to this works with other frontends/backends, head ov
 
 # How it works
 
-> Describe the general architecture of your app here
+Meteor will build everything, client and server then start the server on port 3000
 
 # Getting started
 
-> npm install, npm start, etc.
 
+## Install meteor
+
+First install meteor. You can follow instruction on their [install page](https://www.meteor.com/install).
+
+or follow those instruction
+
+*On MacOS or Linux*
+
+```
+curl https://install.meteor.com/ | sh
+```
+
+*On Windows*
+
+First install Chocolatey, then run this command using an Administrator command prompt:
+
+```
+choco install meteor
+```
+
+## install dependencies
+
+To install dependencies you just need to run npm but with the meteor version.
+
+```
+meteor npm install
+```
+
+## start the project
+
+to start the project simply run
+
+```
+meteor npm start
+```

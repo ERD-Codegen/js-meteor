@@ -1,0 +1,21 @@
+{
+  "name": "meteor-realworld-example-app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.6",
+    "jquery": "^1.12.1"
+  },
+  "scripts": {
+    "start": "meteor run --exclude-archs web.browser.legacy,web.cordova",
+    "start-full": "meteor run",
+    "build": "meteor build",
+    "test": "echo TODO meteor test ..."
+  }
+}
