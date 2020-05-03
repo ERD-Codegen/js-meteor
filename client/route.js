@@ -24,7 +24,29 @@ Meteor.startup(() => {
 */
 
 FlowRouter.route('/', {
+  name: 'home',
   action(/* params, queryParams */) {
     BlazeLayout.render('layout', { content: 'home' });
+  },
+});
+
+FlowRouter.route('/register', {
+  name: 'register',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'register' });
+  },
+});
+
+FlowRouter.route('/login', {
+  name: 'login',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'login' });
+  },
+});
+
+FlowRouter.route('/profile/:username', {
+  name: 'profile',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'profile' });
   },
 });

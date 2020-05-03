@@ -15,8 +15,12 @@ module.exports = {
     // Picker: 'readonly',
     FlowRouter: 'readonly',
     BlazeLayout: 'readonly',
+    AccountsTemplates: 'readonly',
     // AutoForm: 'readonly',
     // LocalStore: 'readonly',
     // moment: 'readonly',
+
+    // App globals
+    validates: 'writable',
   },
 };
