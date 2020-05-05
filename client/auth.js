@@ -26,14 +26,13 @@ Template.register.events({
 
 
 Template.login.onCreated(function loginOnCreated() {
-  this.errors = new ReactiveVar([]);
+  this.error = new ReactiveVar();
 });
 Template.login.events({
   'submit form': function submitForm(event, instance) {
     const options = ['email', 'password'].reduce(formValueToOptions.bind(null, event.currentTarget), {});
-
     Meteor.loginWithPassword(options.email, options.password, (err) => {
-      if (err) instance.errors.set(err.details);
+      if (err) instance.error.set(err);
       else FlowRouter.go('home');
     });
 

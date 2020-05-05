@@ -44,6 +44,13 @@ FlowRouter.route('/login', {
   },
 });
 
+FlowRouter.route('/settings', {
+  name: 'settings',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'settings' });
+  },
+});
+
 FlowRouter.route('/profile/:username', {
   name: 'profile',
   action(/* params, queryParams */) {
