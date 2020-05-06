@@ -1,8 +1,3 @@
-FlowRouter.wait();
-Meteor.startup(() => {
-  FlowRouter.initialize({ hashbang: true });
-});
-
 /**
 - Home page (URL: /#/ )
     - List of tags
@@ -25,6 +20,14 @@ Meteor.startup(() => {
 
 FlowRouter.route('/', {
   name: 'home',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'home' });
+  },
+});
+
+
+FlowRouter.route('/my-feed', {
+  name: 'myFeed',
   action(/* params, queryParams */) {
     BlazeLayout.render('layout', { content: 'home' });
   },

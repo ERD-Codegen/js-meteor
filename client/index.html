@@ -66,7 +66,6 @@
 </template>
 
 <template name="home">
-
   <div class="home-page">
 
     <div class="banner">
@@ -83,10 +82,11 @@
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
-                <a class="nav-link disabled" href="">Your Feed</a>
+                <a class="nav-link {{#if isRouteName 'myFeed'}}active{{else unless currentUser}}disabled{{/if}}"
+                  href="/my-feed">Your Feed</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="">Global Feed</a>
+                <a class="nav-link {{#if isRouteName 'home'}}active{{/if}}" href="/">Global Feed</a>
               </li>
             </ul>
           </div>
