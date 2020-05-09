@@ -1,3 +1,5 @@
+import marked from 'marked';
+
 Template.article.onCreated(function () {
   this.autorun(() => {
     // watch path change to trigger autorun
@@ -10,6 +12,7 @@ Template.article.onCreated(function () {
 
 Template.article.helpers({
   article() { return Articles.findOne({ slug: FlowRouter.getParam('slug') }); },
+  marked(body) { return marked(body); },
 });
 
 Template.articleMeta.onCreated(function () {
