@@ -29,18 +29,21 @@
       <div class="row">
 
         <div class="col-xs-12 col-md-8 offset-md-2">
-
+          {{#if currentUser}}
           <form class="card comment-form">
             <div class="card-block">
               <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
             </div>
             <div class="card-footer">
-              <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+              <img src="{{currentUser.profile.picture}}" class="comment-author-img" />
               <button class="btn btn-sm btn-primary">
                 Post Comment
               </button>
             </div>
           </form>
+          {{else}}
+          <p><a href="/login">Sign in</a> or <a href="/register">sign up</a> to add comments on this article.</p>
+          {{/if}}
 
           <div class="card">
             <div class="card-block">
@@ -87,11 +90,11 @@
   {{/if}}
 </template>
 
-<template name="articleMeta">
+<template name=" articleMeta">
   <div class="article-meta">
-    <a href=""><img src="{{author.profile.picture}}" /></a>
+    <a href="{{path 'profile' username=author.username}}"><img src="{{author.profile.picture}}" /></a>
     <div class="info">
-      <a href="" class="author">{{author.username}}</a>
+      <a href="{{path 'profile' username=author.username}}" class="author">{{author.username}}</a>
       <span class="date">{{dateFormat createdAt}}</span>
     </div>
     <button class="btn btn-sm btn-outline-secondary">
