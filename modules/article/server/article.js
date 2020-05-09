@@ -11,7 +11,7 @@ Meteor.publish('profileArticles', (filter) => {
     username: String,
     favorites: Boolean,
   });
-  console.log(filter);
+
   const user = Meteor.users.findOne({ username: filter.username }, { fields: { _id: 1 } });
   if (!user) return this.ready();
 
