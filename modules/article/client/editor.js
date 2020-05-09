@@ -1,7 +1,7 @@
 import generateSlug from 'slug';
 
 Template.editor.onCreated(function () {
-  this.tags = new ReactiveVar([]);
+  this.tagList = new ReactiveVar([]);
   const errors = new ReactiveVar([]);
 
   this.errors = {
@@ -32,22 +32,22 @@ Template.editor.events({
 
     const el = event.target;
     const tag = el.value;
-    const tags = instance.tags.get();
+    const tagList = instance.tagList.get();
 
     const tagError = 'Tags already added';
-    if (tags.includes(tag)) { instance.errors.add(tagError); return; }
+    if (tagList.includes(tag)) { instance.errors.add(tagError); return; }
     instance.errors.remove(tagError);
 
     if (!tag) return;
 
-    tags.push(tag);
-    instance.tags.set(tags);
+    tagList.push(tag);
+    instance.tagList.set(tagList);
     el.value = '';
   },
   'click .js-tags-remove'(event, instance) {
-    const tags = instance.tags.get();
+    const tags = instance.tagList.get();
     tags.splice(tags.indexOf(this), 1);
-    instance.tags.set(tags);
+    instance.tagList.set(tags);
   },
   'click button': function submitForm(event, instance) {
     event.preventDefault();
@@ -57,7 +57,7 @@ Template.editor.events({
     const title = form.title.value;
     const description = form.description.value;
     const body = form.body.value;
-    const tags = instance.tags.get();
+    const tagList = instance.tagList.get();
 
     instance.errors[title ? 'remove' : 'add']('Title is required');
     instance.errors[description ? 'remove' : 'add']('description is required');
@@ -71,7 +71,10 @@ Template.editor.events({
       description,
       body,
       slug,
-      tags,
+      tagList,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      createdBy: Meteor.userId(),
     });
 
     FlowRouter.go('article', { slug });

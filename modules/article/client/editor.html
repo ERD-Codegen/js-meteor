@@ -28,7 +28,7 @@
               <fieldset class="form-group">
                 <input type="text" class="form-control" placeholder="Enter tags" name="tag">
                 <div class="tag-list">
-                  {{#each tag in instance.tags.get}}
+                  {{#each tag in instance.tagList.get}}
                   <span class="tag-default tag-pill"><i class="ion-close-round js-tags-remove"></i>&nbsp;{{tag}}</span>
                   {{/each}}
                 </div>
