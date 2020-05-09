@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'object-shorthand': 0,
     'func-names': 0,
+    'no-underscore-dangle': 0,
   },
   globals: {
     // Meteor

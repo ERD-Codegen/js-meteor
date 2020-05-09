@@ -24,12 +24,21 @@ Template.articleMeta.onCreated(function () {
 
 
 Template.articleMeta.helpers({
-  article() { return Articles.findOne({ slug: FlowRouter.getParam('slug') }); },
   author() { return Meteor.users.findOne(this.createdBy); },
   dateFormat(date) {
     const options = {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
     };
     return date?.toLocaleDateString(undefined, options);
+  },
+  isFavorited() { return this.favorites?.includes(Meteor.userId()); },
+});
+
+
+Template.articleMeta.events({
+  'click .js-article-favorite'() {
+    const userId = Meteor.userId();
+    const isFavorited = this.favorites?.includes(userId);
+    Articles.update(this._id, { [isFavorited ? '$pull' : '$addToSet']: { favorites: userId } });
   },
 });

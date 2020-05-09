@@ -90,13 +90,25 @@
   {{/if}}
 </template>
 
-<template name=" articleMeta">
+<template name="articlePreview">
+  <div class="article-preview">
+    {{> articleMeta}}
+    <a href="{{path 'article' slug=slug}}" class="preview-link">
+      <h1>{{title}}</h1>
+      <p>{{description}}</p>
+      <span>Read more...</span>
+    </a>
+  </div>
+</template>
+
+<template name="articleMeta">
   <div class="article-meta">
     <a href="{{path 'profile' username=author.username}}"><img src="{{author.profile.picture}}" /></a>
     <div class="info">
       <a href="{{path 'profile' username=author.username}}" class="author">{{author.username}}</a>
       <span class="date">{{dateFormat createdAt}}</span>
     </div>
+    {{#if isRouteName 'article'}}
     <button class="btn btn-sm btn-outline-secondary">
       <i class="ion-plus-round"></i>
       &nbsp;
@@ -106,7 +118,13 @@
     <button class="btn btn-sm btn-outline-primary">
       <i class="ion-heart"></i>
       &nbsp;
-      Favorite Post <span class="counter">(29)</span>
+      Favorite Post <span class="counter">({{favorites.length}})</span>
     </button>
+    {{else}}
+    <button
+      class="btn {{#if isFavorited}}btn-primary{{else}}btn-outline-primary{{/if}} btn-sm pull-xs-right js-article-favorite">
+      <i class="ion-heart"></i> {{favorites.length}}
+    </button>
+    {{/if}}
   </div>
 </template>

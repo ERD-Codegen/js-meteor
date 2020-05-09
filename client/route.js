@@ -61,6 +61,13 @@ FlowRouter.route('/profile/:username', {
   },
 });
 
+FlowRouter.route('/profile/:username/favorites', {
+  name: 'profileFavorites',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'profile' });
+  },
+});
+
 FlowRouter.route('/editor', {
   name: 'editor',
   action(/* params, queryParams */) {
