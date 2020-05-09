@@ -28,6 +28,7 @@ Template.register.events({
 Template.login.onCreated(function loginOnCreated() {
   this.error = new ReactiveVar();
 });
+
 Template.login.events({
   'submit form': function submitForm(event, instance) {
     const options = ['email', 'password'].reduce(formValueToOptions.bind(null, event.currentTarget), {});
