@@ -60,3 +60,17 @@ FlowRouter.route('/profile/:username', {
     BlazeLayout.render('layout', { content: 'profile' });
   },
 });
+
+FlowRouter.route('/editor', {
+  name: 'editor',
+  action(/* params, queryParams */) {
+    BlazeLayout.render('layout', { content: 'editor' });
+  },
+});
+
+FlowRouter.route('/article/:slug', {
+  name: 'article',
+  action() {
+    BlazeLayout.render('layout', { content: 'article' });
+  },
+});

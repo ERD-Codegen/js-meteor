@@ -10,6 +10,10 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
   },
+  rules: {
+    'object-shorthand': 0,
+    'func-names': 0,
+  },
   globals: {
     // Meteor
     // Picker: 'readonly',
@@ -19,6 +23,9 @@ module.exports = {
     // AutoForm: 'readonly',
     // LocalStore: 'readonly',
     // moment: 'readonly',
+
+    // Meteor.Collection
+    Articles: 'writable',
 
     // App globals
     validates: 'writable',
