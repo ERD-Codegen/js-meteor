@@ -30,7 +30,6 @@ Template.editor.onCreated(function () {
     this.subscribe('article', slug, () => {
       const article = Articles.findOne({ slug: FlowRouter.getParam('slug') });
       const tagList = article.tagList || [];
-      console.log('sub article', { article, tagList });
       this.tagList.set(tagList);
     });
   }

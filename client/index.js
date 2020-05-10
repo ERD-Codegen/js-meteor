@@ -13,7 +13,7 @@ Template.home.onCreated(function () {
   });
 
   this.popularTags = new ReactiveVar([]);
-  Meteor.call('popularTags', (err, popularTags) => { console.log(popularTags); this.popularTags.set(popularTags); });
+  Meteor.call('popularTags', (err, popularTags) => { this.popularTags.set(popularTags); });
 });
 
 Template.home.helpers({
