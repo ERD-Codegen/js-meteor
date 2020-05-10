@@ -15,6 +15,7 @@ Articles.helpers({
 
 Meteor.users.helpers({
   following() { return this.profile?.followerIds?.includes(Meteor.userId()) ?? false; },
+  picture() { return this.profile?.picture || 'https://static.productionready.io/images/smiley-cyrus.jpg'; },
 });
 
 

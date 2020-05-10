@@ -40,7 +40,7 @@
               <textarea class="form-control" placeholder="Write a comment..." rows="3" name="comment"></textarea>
             </div>
             <div class="card-footer">
-              <img src="{{currentUser.profile.picture}}" class="comment-author-img" />
+              <img src="{{currentUser.picture}}" class="comment-author-img" />
               <button class="btn btn-sm btn-primary">
                 Post Comment
               </button>
@@ -84,7 +84,7 @@
 
 <template name="articleMeta">
   <div class="article-meta">
-    <a href="{{path 'profile' username=author.username}}"><img src="{{author.profile.picture}}" /></a>
+    <a href="{{path 'profile' username=author.username}}"><img src="{{author.picture}}" /></a>
     <div class="info">
       <a href="{{path 'profile' username=author.username}}" class="author">{{author.username}}</a>
       <span class="date">{{dateFormat createdAt}}</span>
@@ -132,7 +132,7 @@
     </div>
     <div class="card-footer">
       <a href="{{path 'profile' username=author.username}}" class="comment-author">
-        <img src="{{author.profile.picture}}" class="comment-author-img" />
+        <img src="{{author.picture}}" class="comment-author-img" />
       </a>
       &nbsp;
       <a href="{{path 'profile' username=author.username}}" class="comment-author">{{username}}</a>
