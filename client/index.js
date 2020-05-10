@@ -13,7 +13,7 @@ Template.home.onCreated(function () {
 });
 
 Template.home.helpers({
-  articles() { return Articles.find({}); },
+  articles() { return Articles.find({}, { sort: { createdAt: -1 } }); },
   isFeedTag() { return ['global', 'mine'].every((feed) => feed !== Template.instance().feed.get()); },
 });
 

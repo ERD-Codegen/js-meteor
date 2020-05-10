@@ -8,3 +8,8 @@ Template.registerHelper('path', (pathDef, options) => FlowRouter.path(pathDef, o
 // Array
 Template.registerHelper('count', (arr) => arr?.length ?? 0);
 Template.registerHelper('includes', (arr, include) => arr?.includes?.(include));
+
+// Date
+Template.registerHelper('dateFormat', (date) => date?.toLocaleDateString(undefined, {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+}));

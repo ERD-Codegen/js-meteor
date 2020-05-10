@@ -14,5 +14,27 @@ Articles.helpers({
 });
 
 Meteor.users.helpers({
-  isFavorited() { return this.favoritesOf?.inclues(Meteor.userId()) ?? false; },
+  isFavorited() { return this.favoritesOf?.includes(Meteor.userId()) ?? false; },
 });
+
+
+Comments = new Meteor.Collection('comments');
+
+Comments.helpers({
+  author() { return Meteor.users.findOne(this.createdBy); },
+  isAuthor() { return this.createdBy === Meteor.userId(); },
+});
+
+Comments.add = (body) => {
+  if (!body) return;
+
+  const userId = Meteor.userId();
+  if (!userId) return;
+
+  const article = Articles.findOne({ slug: FlowRouter.getParam('slug') });
+  if (!article) return;
+
+  Comments.insert({
+    createdBy: userId, createdAt: new Date(), articleId: article._id, body,
+  });
+};

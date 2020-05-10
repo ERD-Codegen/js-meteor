@@ -27,6 +27,7 @@ module.exports = {
 
     // Meteor.Collection
     Articles: 'writable',
+    Comments: 'writable',
 
     // App globals
     validates: 'writable',

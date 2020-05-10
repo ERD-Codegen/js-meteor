@@ -37,7 +37,7 @@
           {{#if currentUser}}
           <form class="card comment-form">
             <div class="card-block">
-              <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+              <textarea class="form-control" placeholder="Write a comment..." rows="3" name="comment"></textarea>
             </div>
             <div class="card-footer">
               <img src="{{currentUser.profile.picture}}" class="comment-author-img" />
@@ -50,37 +50,9 @@
           <p><a href="/login">Sign in</a> or <a href="/register">sign up</a> to add comments on this article.</p>
           {{/if}}
 
-          <div class="card">
-            <div class="card-block">
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <a href="" class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
-              </a>
-              &nbsp;
-              <a href="" class="comment-author">Jacob Schmidt</a>
-              <span class="date-posted">Dec 29th</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-block">
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <a href="" class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
-              </a>
-              &nbsp;
-              <a href="" class="comment-author">Jacob Schmidt</a>
-              <span class="date-posted">Dec 29th</span>
-              <span class="mod-options">
-                <i class="ion-edit"></i>
-                <i class="ion-trash-a"></i>
-              </span>
-            </div>
-          </div>
+          {{#each comments}}
+          {{> comment}}
+          {{/each}}
 
         </div>
 
@@ -151,5 +123,27 @@
       <i class="ion-heart"></i> {{favorites.length}}
     </button>
     {{/if}}
+  </div>
+</template>
+
+<template name="comment">
+  <div class="card">
+    <div class="card-block">
+      <p class="card-text">{{body}}</p>
+    </div>
+    <div class="card-footer">
+      <a href="{{path 'profile' username=author.username}}" class="comment-author">
+        <img src="{{author.profile.picture}}" class="comment-author-img" />
+      </a>
+      &nbsp;
+      <a href="{{path 'profile' username=author.username}}" class="comment-author">{{username}}</a>
+      <span class="date-posted">{{dateFormat createdAt}}</span>
+      {{#if isAuthor}}
+      <span class="mod-options">
+        <!-- <i class="ion-edit"></i> -->
+        <i class="ion-trash-a js-comment-delete"></i>
+      </span>
+      {{/if}}
+    </div>
   </div>
 </template>

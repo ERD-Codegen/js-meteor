@@ -13,7 +13,10 @@ Meteor.publish('article', (slug) => Articles.find({ slug }, {
   limit: 20,
 }));
 
-Meteor.publish('articleAuthor', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, favoritesOf: 1, username: 1 } }));
+Meteor.publish('comments', (_id) => Comments.find({ articleId: _id }, { fields: { createdBy: 1, createdAt: 1, body: 1 } }));
+
+Meteor.publish('author', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, favoritesOf: 1, username: 1 } }));
+
 
 Meteor.publish('profileArticles', (filter) => {
   check(filter, {

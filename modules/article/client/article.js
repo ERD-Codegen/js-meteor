@@ -5,7 +5,12 @@ Template.article.onCreated(function () {
     // watch path change to trigger autorun
     FlowRouter.watchPathChange();
 
-    this.subscribe('article', FlowRouter.getParam('slug'));
+    this.subscribe('article', FlowRouter.getParam('slug'), () => {
+      const article = Articles.findOne({ slug: FlowRouter.getParam('slug') });
+      if (!article) return;
+
+      this.subscribe('comments', article._id);
+    });
   });
 });
 
@@ -13,22 +18,24 @@ Template.article.onCreated(function () {
 Template.article.helpers({
   article() { return Articles.findOne({ slug: FlowRouter.getParam('slug') }); },
   marked(body) { return marked(body); },
+  comments() { return Comments.find({}, { sort: { createdAt: -1 } }).fetch(); },
+});
+
+Template.article.events({
+  'submit form'(event) {
+    event.preventDefault();
+
+    const textarea = event.currentTarget.comment;
+    Comments.add(textarea.value);
+    textarea.value = '';
+  },
 });
 
 Template.articleMeta.onCreated(function () {
   this.autorun(() => {
     const article = Template.currentData();
-    if (article) this.subscribe('articleAuthor', article.createdBy);
+    if (article) this.subscribe('author', article.createdBy);
   });
-});
-
-
-Template.articleMeta.helpers({
-  dateFormat(date) {
-    return date?.toLocaleDateString(undefined, {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    });
-  },
 });
 
 
@@ -43,5 +50,19 @@ Template.articleMeta.events({
   'click .js-author-favorite'() {
     const author = Meteor.users.findOne(this.createdBy);
     Meteor.call('authorFavorite', this.createdBy, author.isFavorited());
+  },
+});
+
+Template.comment.onCreated(function () {
+  this.autorun(() => {
+    const comment = Template.currentData();
+    if (comment) this.subscribe('author', comment.createdBy);
+  });
+});
+
+
+Template.comment.events({
+  'click .js-comment-delete'() {
+    Comments.remove(this._id);
   },
 });
