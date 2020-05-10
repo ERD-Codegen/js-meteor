@@ -17,6 +17,11 @@
       <div class="row article-content">
         <div class="col-md-12">
           {{{marked body}}}
+          <ul class="tag-list">
+            {{#each tag in tagList}}
+            <li class="tag-default tag-pill tag-outline">{{tag}}</li>
+            {{/each}}
+          </ul>
         </div>
       </div>
 

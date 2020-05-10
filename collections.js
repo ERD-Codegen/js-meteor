@@ -7,6 +7,7 @@ Articles.helpers({
 
   favoriteToggle() {
     const userId = Meteor.userId();
+    if (!userId) return;
     const isFavorited = this.favorites?.includes(userId);
     Articles.update(this._id, { [isFavorited ? '$pull' : '$addToSet']: { favorites: userId } });
   },

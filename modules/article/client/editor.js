@@ -24,6 +24,20 @@ Template.editor.onCreated(function () {
     },
     clear() { errors.set([]); },
   };
+
+  const slug = FlowRouter.getParam('slug');
+  if (slug) {
+    this.subscribe('article', slug, () => {
+      const article = Articles.findOne({ slug: FlowRouter.getParam('slug') });
+      const tagList = article.tagList || [];
+      console.log('sub article', { article, tagList });
+      this.tagList.set(tagList);
+    });
+  }
+});
+
+Template.editor.helpers({
+  article() { return Articles.findOne({ slug: FlowRouter.getParam('slug') }); },
 });
 
 Template.editor.events({
@@ -65,18 +79,26 @@ Template.editor.events({
 
     if (instance.errors.list().length) return;
 
-    const slug = `${generateSlug(title)}-${Random.id(6).toLowerCase()}`;
-    Articles.insert({
+    const article = {
+      slug: FlowRouter.getParam('slug'),
       title,
       description,
       body,
-      slug,
       tagList,
-      createdAt: new Date(),
       updatedAt: new Date(),
-      createdBy: Meteor.userId(),
-    });
+    };
 
-    FlowRouter.go('article', { slug });
+    if (article.slug) {
+      const articleId = Articles.findOne({ slug: FlowRouter.getParam('slug') })._id;
+      if (articleId) Articles.update(articleId, { $set: article });
+    } else {
+      article.slug = `${generateSlug(title)}-${Random.id(6).toLowerCase()}`;
+      article.createdAt = new Date();
+      article.createdBy = Meteor.userId();
+
+      Articles.insert();
+    }
+
+    FlowRouter.go('article', { slug: article.slug });
   },
 });
