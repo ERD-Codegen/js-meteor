@@ -80,52 +80,35 @@
 
         <div class="col-md-9">
           <div class="feed-toggle">
+            {{#if logginIn}}
+            Logging in...
+            {{else}}
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
-                <a class="nav-link {{#if isRouteName 'myFeed'}}active{{else unless currentUser}}disabled{{/if}}"
-                  href="/my-feed">Your Feed</a>
+                <a class="nav-link {{#if eq instance.feed.get 'mine'}}active{{else unless currentUser}}disabled{{/if}} js-home-feed"
+                  href="/" data-feed="mine">Your Feed</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{#if isRouteName 'home'}}active{{/if}}" href="/">Global Feed</a>
+                <a class="nav-link {{#if eq instance.feed.get 'global'}}active{{else}}js-home-feed{{/if}}" href="/"
+                  data-feed="global">Global Feed</a>
               </li>
+              {{#if isFeedTag}}
+              <li class="nav-item">
+                <a class="nav-link active" href="/" data-show-my-feed="false">#&nbsp;{{instance.feed.get}}</a>
+              </li>
+              {{/if}}
             </ul>
+            {{/if}}
           </div>
 
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
-              <div class="info">
-                <a href="" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>How to build webapps that scale</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-            </a>
-          </div>
 
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href="profile.html"><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
-              <div class="info">
-                <a href="" class="author">Albert Pai</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 32
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-            </a>
-          </div>
+          {{#if Template.subscriptionsReady}}
+          {{#each articles}}
+          {{> articlePreview}}
+          {{/each}}
+          {{else}}
+          Loading...
+          {{/if}}
 
         </div>
 
@@ -134,14 +117,15 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <a href="" class="tag-pill tag-default">programming</a>
-              <a href="" class="tag-pill tag-default">javascript</a>
-              <a href="" class="tag-pill tag-default">emberjs</a>
-              <a href="" class="tag-pill tag-default">angularjs</a>
-              <a href="" class="tag-pill tag-default">react</a>
-              <a href="" class="tag-pill tag-default">mean</a>
-              <a href="" class="tag-pill tag-default">node</a>
-              <a href="" class="tag-pill tag-default">rails</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="programming">programming</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="javascript">javascript</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="emberjs">emberjs</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="angularjs">angularjs</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="react">react</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="mean">mean</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="node">node</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="rails">rails</a>
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="test">test</a>
             </div>
           </div>
         </div>

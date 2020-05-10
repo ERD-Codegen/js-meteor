@@ -97,6 +97,11 @@
       <h1>{{title}}</h1>
       <p>{{description}}</p>
       <span>Read more...</span>
+      <ul class="tag-list">
+        {{#each tag in tagList}}
+        <li class="tag-default tag-pill tag-outline">{{tag}}</li>
+        {{/each}}
+      </ul>
     </a>
   </div>
 </template>
