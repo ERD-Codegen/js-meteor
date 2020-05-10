@@ -125,15 +125,9 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="programming">programming</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="javascript">javascript</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="emberjs">emberjs</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="angularjs">angularjs</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="react">react</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="mean">mean</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="node">node</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="rails">rails</a>
-              <a href="" class="tag-pill tag-default js-home-feed" data-feed="test">test</a>
+              {{#each tag in instance.popularTags.get}}
+              <a href="" class="tag-pill tag-default js-home-feed" data-feed="{{tag}}">{{tag}}</a>
+              {{/each}}
             </div>
           </div>
         </div>

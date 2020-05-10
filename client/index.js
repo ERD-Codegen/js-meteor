@@ -11,6 +11,9 @@ Template.home.onCreated(function () {
   this.autorun(() => {
     this.subscribe('articles', this.feed.get(), this.offset.get());
   });
+
+  this.popularTags = new ReactiveVar([]);
+  Meteor.call('popularTags', (err, popularTags) => { console.log(popularTags); this.popularTags.set(popularTags); });
 });
 
 Template.home.helpers({

@@ -45,4 +45,7 @@ Meteor.methods({
     const unFollow = Meteor.users.findOne(userId).following();
     Meteor.users.update(userId, { [unFollow ? '$pull' : '$addToSet']: { 'profile.followerIds': this.userId } });
   },
+  popularTags() {
+    return Articles.rawCollection().aggregate([{ $unwind: '$tagList' }, { $sortByCount: '$tagList' }, { $limit: 20 }]).map((tag) => tag._id).toArray();
+  },
 });
