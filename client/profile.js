@@ -21,3 +21,10 @@ Template.profile.helpers({
     return Articles.find({});
   },
 });
+
+Template.profile.events({
+  'click .js-user-follow'() {
+    const user = Meteor.users.findOne({ username: FlowRouter.getParam('username') });
+    Meteor.call('userFollow', user._id);
+  },
+});

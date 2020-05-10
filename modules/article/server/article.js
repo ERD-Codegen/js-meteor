@@ -52,7 +52,7 @@ Meteor.publish('articles', function (feed) {
 
   if (feed === 'mine') {
     if (!this.userId) return this.ready();
-    selector.createdBy = { $in: Meteor.users.find({ 'profile.favoritesOf': this.userId }).map((u) => u._id) };
+    selector.createdBy = { $in: Meteor.users.find({ 'profile.followerIds': this.userId }).map((u) => u._id) };
   } else if (feed !== 'global') {
     // it's a tag
     selector.tagList = feed;

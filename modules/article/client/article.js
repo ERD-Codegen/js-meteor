@@ -48,8 +48,7 @@ Template.articleMeta.events({
     FlowRouter.go('home');
   },
   'click .js-author-favorite'() {
-    const author = Meteor.users.findOne(this.createdBy);
-    Meteor.call('authorFavorite', this.createdBy, author.isFavorited());
+    Meteor.call('userFollow');
   },
 });
 

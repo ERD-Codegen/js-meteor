@@ -37,13 +37,12 @@ Meteor.methods({
       if (actualEmail) Accounts.removeEmail(userId, actualEmail);
     }
   },
-  authorFavorite(authorId, undo) {
-    const { userId } = this;
-    if (!userId) return;
+  userFollow(userId) {
+    if (!this.userId) return;
 
-    check(authorId, String);
-    check(undo, Boolean);
+    check(userId, String);
 
-    Meteor.users.update(authorId, { [undo ? '$pull' : '$addToSet']: { 'profile.favoritesOf': userId } });
+    const unFollow = Meteor.users.findOne(userId).following();
+    Meteor.users.update(userId, { [unFollow ? '$pull' : '$addToSet']: { 'profile.followerIds': this.userId } });
   },
 });
