@@ -68,7 +68,7 @@ FlowRouter.route('/profile/:username/favorites', {
   },
 });
 
-FlowRouter.route('/editor', {
+FlowRouter.route('/editor/:slug?', {
   name: 'editor',
   action(/* params, queryParams */) {
     BlazeLayout.render('layout', { content: 'editor' });

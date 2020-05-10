@@ -36,6 +36,10 @@ Template.articleMeta.events({
   'click .js-article-favorite'() {
     Articles.findOne(this._id).favoriteToggle();
   },
+  'click .js-article-delete'() {
+    Articles.remove(this._id);
+    FlowRouter.go('home');
+  },
   'click .js-author-favorite'() {
     const author = Meteor.users.findOne(this.createdBy);
     Meteor.call('authorFavorite', this.createdBy, author.isFavorited());

@@ -114,8 +114,20 @@
       <span class="date">{{dateFormat createdAt}}</span>
     </div>
     {{#if isRouteName 'article'}}
-    <button
-      class="btn btn-sm {{#if author.isFavorited}}btn-secondary{{else}}btn-outline-secondary{{/if}} js-author-favorite">
+    {{#if isAuthor}}
+    <a class="btn btn-sm {{#if author.isFavorited}}btn-secondary{{else}}btn-outline-secondary{{/if}}"
+      href="{{path 'editor' slug=slug}}">
+      <i class="ion-edit"></i>
+      &nbsp;Edit Article
+    </a>
+    &nbsp;&nbsp;
+    <button class="btn btn-sm btn-outline-danger js-article-delete">
+      <i class="ion-trash"></i>
+      &nbsp;Delete Article
+    </button>
+    {{else}}
+    <button class=" btn btn-sm {{#if author.isFavorited}}btn-secondary{{else}}btn-outline-secondary{{/if}}
+      js-author-favorite">
       <i class="ion-plus-round"></i>
       &nbsp;
       Follow {{author.username}} <span class="counter">({{count author.favoritesOf}})</span>
@@ -127,6 +139,7 @@
       &nbsp;
       Favorite Post <span class="counter">({{count favorites}})</span>
     </button>
+    {{/if}}
     {{else}}
     <button
       class="btn {{#if this.isFavorited}}btn-primary{{else}}btn-outline-primary{{/if}} btn-sm pull-xs-right js-article-favorite">
