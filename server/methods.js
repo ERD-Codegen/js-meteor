@@ -37,4 +37,13 @@ Meteor.methods({
       if (actualEmail) Accounts.removeEmail(userId, actualEmail);
     }
   },
+  authorFavorite(authorId, undo) {
+    const { userId } = this;
+    if (!userId) return;
+
+    check(authorId, String);
+    check(undo, Boolean);
+
+    Meteor.users.update(authorId, { [undo ? '$pull' : '$addToSet']: { favoritesOf: userId } });
+  },
 });

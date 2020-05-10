@@ -114,20 +114,22 @@
       <span class="date">{{dateFormat createdAt}}</span>
     </div>
     {{#if isRouteName 'article'}}
-    <button class="btn btn-sm btn-outline-secondary">
+    <button
+      class="btn btn-sm {{#if author.isFavorited}}btn-secondary{{else}}btn-outline-secondary{{/if}} js-author-favorite">
       <i class="ion-plus-round"></i>
       &nbsp;
-      Follow {{author.username}} <span class="counter">(10)</span>
+      Follow {{author.username}} <span class="counter">({{count author.favoritesOf}})</span>
     </button>
     &nbsp;&nbsp;
-    <button class="btn btn-sm btn-outline-primary">
+    <button
+      class="btn btn-sm {{#if this.isFavorited}}btn-primary{{else}}btn-outline-primary{{/if}} js-article-favorite">
       <i class="ion-heart"></i>
       &nbsp;
-      Favorite Post <span class="counter">({{favorites.length}})</span>
+      Favorite Post <span class="counter">({{count favorites}})</span>
     </button>
     {{else}}
     <button
-      class="btn {{#if isFavorited}}btn-primary{{else}}btn-outline-primary{{/if}} btn-sm pull-xs-right js-article-favorite">
+      class="btn {{#if this.isFavorited}}btn-primary{{else}}btn-outline-primary{{/if}} btn-sm pull-xs-right js-article-favorite">
       <i class="ion-heart"></i> {{favorites.length}}
     </button>
     {{/if}}

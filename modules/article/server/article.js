@@ -6,7 +6,7 @@ Meteor.publish('article', (slug) => Articles.find({ slug }, {
   limit: 20,
 }));
 
-Meteor.publish('articleAuthor', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, username: 1 } }));
+Meteor.publish('articleAuthor', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, favoritesOf: 1, username: 1 } }));
 
 Meteor.publish('profileArticles', (filter) => {
   check(filter, {

@@ -24,21 +24,20 @@ Template.articleMeta.onCreated(function () {
 
 
 Template.articleMeta.helpers({
-  author() { return Meteor.users.findOne(this.createdBy); },
   dateFormat(date) {
-    const options = {
+    return date?.toLocaleDateString(undefined, {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    };
-    return date?.toLocaleDateString(undefined, options);
+    });
   },
-  isFavorited() { return this.favorites?.includes(Meteor.userId()); },
 });
 
 
 Template.articleMeta.events({
   'click .js-article-favorite'() {
-    const userId = Meteor.userId();
-    const isFavorited = this.favorites?.includes(userId);
-    Articles.update(this._id, { [isFavorited ? '$pull' : '$addToSet']: { favorites: userId } });
+    Articles.findOne(this._id).favoriteToggle();
+  },
+  'click .js-author-favorite'() {
+    const author = Meteor.users.findOne(this.createdBy);
+    Meteor.call('authorFavorite', this.createdBy, author.isFavorited());
   },
 });
