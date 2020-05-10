@@ -44,6 +44,6 @@ Meteor.methods({
     check(authorId, String);
     check(undo, Boolean);
 
-    Meteor.users.update(authorId, { [undo ? '$pull' : '$addToSet']: { favoritesOf: userId } });
+    Meteor.users.update(authorId, { [undo ? '$pull' : '$addToSet']: { 'profile.favoritesOf': userId } });
   },
 });

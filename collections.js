@@ -14,7 +14,7 @@ Articles.helpers({
 });
 
 Meteor.users.helpers({
-  isFavorited() { return this.favoritesOf?.includes(Meteor.userId()) ?? false; },
+  isFavorited() { return this.profile?.favoritesOf?.includes(Meteor.userId()) ?? false; },
 });
 
 

@@ -15,10 +15,10 @@ Meteor.publish('article', (slug) => Articles.find({ slug }, {
 
 Meteor.publish('comments', (_id) => Comments.find({ articleId: _id }, { fields: { createdBy: 1, createdAt: 1, body: 1 } }));
 
-Meteor.publish('author', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, favoritesOf: 1, username: 1 } }));
+Meteor.publish('author', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, username: 1 } }));
 
 
-Meteor.publish('profileArticles', (filter) => {
+Meteor.publish('profileArticles', function (filter) {
   check(filter, {
     username: String,
     favorites: Boolean,
@@ -44,7 +44,7 @@ Meteor.publish('profileArticles', (filter) => {
 });
 
 
-Meteor.publish('articles', (feed) => {
+Meteor.publish('articles', function (feed) {
   check(feed, String);
 
   // default is global feed
@@ -52,7 +52,7 @@ Meteor.publish('articles', (feed) => {
 
   if (feed === 'mine') {
     if (!this.userId) return this.ready();
-    selector.createdBy = { $in: Meteor.users.find({ favoritesOf: this.userId }).map((u) => u._id) };
+    selector.createdBy = { $in: Meteor.users.find({ 'profile.favoritesOf': this.userId }).map((u) => u._id) };
   } else if (feed !== 'global') {
     // it's a tag
     selector.tagList = feed;

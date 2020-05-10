@@ -63,7 +63,7 @@ Template.editor.events({
     tags.splice(tags.indexOf(this), 1);
     instance.tagList.set(tags);
   },
-  'click button': function submitForm(event, instance) {
+  'click button'(event, instance) {
     event.preventDefault();
 
     const { form } = event.currentTarget;
@@ -96,7 +96,7 @@ Template.editor.events({
       article.createdAt = new Date();
       article.createdBy = Meteor.userId();
 
-      Articles.insert();
+      Articles.insert(article);
     }
 
     FlowRouter.go('article', { slug: article.slug });
