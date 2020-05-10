@@ -10,7 +10,7 @@ Meteor.publish('article', (slug) => Articles.find({ slug }, {
     tagList: 1,
   },
   sort: { createdAt: -1 },
-  limit: 20,
+  limit: 1,
 }));
 
 Meteor.publish('comments', (_id) => Comments.find({ articleId: _id }, { fields: { createdBy: 1, createdAt: 1, body: 1 } }));
@@ -18,11 +18,12 @@ Meteor.publish('comments', (_id) => Comments.find({ articleId: _id }, { fields: 
 Meteor.publish('author', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, username: 1 } }));
 
 
-Meteor.publish('profileArticles', function (filter) {
+Meteor.publish('profileArticles', function (filter, offset) {
   check(filter, {
     username: String,
     favorites: Boolean,
   });
+  check(offset, Number);
 
   const user = Meteor.users.findOne({ username: filter.username }, { fields: { _id: 1 } });
   if (!user) return this.ready();
@@ -39,13 +40,15 @@ Meteor.publish('profileArticles', function (filter) {
       tagList: 1,
     },
     sort: { createdAt: -1 },
+    skip: offset,
     limit: 20,
   });
 });
 
 
-Meteor.publish('articles', function (feed) {
+Meteor.publish('articles', function (feed, offset) {
   check(feed, String);
+  check(offset, Number);
 
   // default is global feed
   const selector = {};
@@ -70,6 +73,7 @@ Meteor.publish('articles', function (feed) {
       tagList: 1,
     },
     sort: { createdAt: -1 },
+    skip: offset,
     limit: 20,
   });
 });

@@ -6,9 +6,10 @@ Template.header.helpers({
 
 Template.home.onCreated(function () {
   this.feed = new ReactiveVar('global');
+  this.offset = new ReactiveVar(0);
 
   this.autorun(() => {
-    this.subscribe('articles', this.feed.get());
+    this.subscribe('articles', this.feed.get(), this.offset.get());
   });
 });
 
@@ -22,5 +23,9 @@ Template.home.events({
     event.preventDefault();
 
     instance.feed.set(event.currentTarget.dataset.feed);
+  },
+  'click .js-offset-update'(event, instance) {
+    event.preventDefault();
+    instance.offset.set(instance.offset.get() + +event.currentTarget.dataset.offset);
   },
 });

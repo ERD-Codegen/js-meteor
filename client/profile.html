@@ -50,6 +50,14 @@
           {{#each articles}}
           {{> articlePreview}}
           {{/each}}
+          <nav>
+            <ul class="pagination">
+              {{#if instance.offset.get}}
+              <li class="page-item "><a class="page-link js-offset-update" data-offset="-20" href="/">Newer</a> </li>
+              {{/if}}
+              <li class="page-item "><a class="page-link js-offset-update" data-offset="20" href="/">Older</a> </li>
+            </ul>
+          </nav>
           {{else}}
           Loading...
           {{/if}}

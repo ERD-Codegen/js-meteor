@@ -90,7 +90,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link {{#if eq instance.feed.get 'global'}}active{{else}}js-home-feed{{/if}}" href="/"
-                  data-feed="global">Global Feed</a>
+                  data-feed="global">Global Feed ({{instance.offset.get}})</a>
               </li>
               {{#if isFeedTag}}
               <li class="nav-item">
@@ -106,6 +106,14 @@
           {{#each articles}}
           {{> articlePreview}}
           {{/each}}
+          <nav>
+            <ul class="pagination">
+              {{#if instance.offset.get}}
+              <li class="page-item "><a class="page-link js-offset-update" data-offset="-20" href="/">Newer</a> </li>
+              {{/if}}
+              <li class="page-item "><a class="page-link js-offset-update" data-offset="20" href="/">Older</a> </li>
+            </ul>
+          </nav>
           {{else}}
           Loading...
           {{/if}}
