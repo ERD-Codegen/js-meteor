@@ -1,13 +1,15 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   env: {
     meteor: true,
     browser: true,
     es2020: true,
     node: true,
   },
-  extends: ['airbnb-base'],
+  plugins: ['meteor'],
+  extends: ['airbnb-base', 'plugin:meteor/recommended'],
   parserOptions: {
+    requireConfigFile: false,
     sourceType: 'module',
   },
   rules: {
