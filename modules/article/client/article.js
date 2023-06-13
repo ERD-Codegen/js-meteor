@@ -14,7 +14,6 @@ Template.article.onCreated(function () {
   });
 });
 
-
 Template.article.helpers({
   article() { return Articles.findOne({ slug: FlowRouter.getParam('slug') }); },
   marked(body) { return marked(body); },
@@ -38,7 +37,6 @@ Template.articleMeta.onCreated(function () {
   });
 });
 
-
 Template.articleMeta.events({
   'click .js-article-favorite'() {
     Articles.findOne(this._id).favoriteToggle();
@@ -48,7 +46,7 @@ Template.articleMeta.events({
     FlowRouter.go('home');
   },
   'click .js-author-favorite'() {
-    Meteor.call('userFollow');
+    Meteor.call('userFollow', this.createdBy);
   },
 });
 
@@ -58,7 +56,6 @@ Template.comment.onCreated(function () {
     if (comment) this.subscribe('author', comment.createdBy);
   });
 });
-
 
 Template.comment.events({
   'click .js-comment-delete'() {
