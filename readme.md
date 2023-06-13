@@ -2,9 +2,7 @@
 
 > ### Meteor codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
-
-### [Demo](https://realworld.meteorapp.com/)&nbsp;&nbsp;&nbsp;&nbsp;[MetoerRealWorld](https://github.com/peernohell/meteor-realworld-example-app)
-
+### [Demo](https://realworld.meteorapp.com/)&nbsp;&nbsp;&nbsp;&nbsp;[MeteorRealWorld](https://github.com/peernohell/meteor-realworld-example-app)
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **Meteor** including CRUD operations, authentication, routing, pagination, and more.
 
@@ -12,13 +10,11 @@ We've gone to great lengths to adhere to the **Meteor** community styleguides & 
 
 For more information on how to this works with other frontends/backends, head over to the [MeteorRealWorld](https://github.com/peernohell/meteor-realworld-example-app) repo.
 
-
 # How it works
 
 Meteor will build everything, client and server then start the server on port 3000
 
 # Getting started
-
 
 ## Install meteor
 
@@ -26,13 +22,13 @@ First install meteor. You can follow instruction on their [install page](https:/
 
 or follow those instruction
 
-*On MacOS or Linux*
+_On MacOS or Linux_
 
 ```
 curl https://install.meteor.com/ | sh
 ```
 
-*On Windows*
+_On Windows_
 
 First install Chocolatey, then run this command using an Administrator command prompt:
 
