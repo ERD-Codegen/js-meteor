@@ -3,22 +3,22 @@
   "version": "1.1.0",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.17.4",
-    "@babel/eslint-parser": "^7.17.0",
+    "@babel/core": "^7.24.8",
+    "@babel/eslint-parser": "^7.24.8",
     "babel-eslint": "^10.1.0",
-    "eslint": "^8.9.0",
+    "eslint": "^9.7.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-meteor": "^7.3.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
-    "@types/meteor": "^2.0.4",
-    "bcrypt": "^5.0.1",
-    "jquery": "^3.6.0",
-    "marked": "^4.0.12",
-    "simpl-schema": "^1.12.0",
-    "slug": "^5.2.0"
+    "@babel/runtime": "^7.24.8",
+    "@types/meteor": "^2.9.8",
+    "bcrypt": "^5.1.1",
+    "jquery": "^3.7.1",
+    "marked": "^13.0.2",
+    "simpl-schema": "^3.4.6",
+    "slug": "^9.1.0"
   },
   "scripts": {
     "start": "meteor run --exclude-archs web.browser.legacy,web.cordova",
