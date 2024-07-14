@@ -1,3 +1,7 @@
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+window.FlowRouter = FlowRouter;
+
 Template.header.helpers({
   isCurrentUserProfile() {
     return FlowRouter.getParam('username') === Meteor.user().username;

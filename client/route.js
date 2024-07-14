@@ -21,7 +21,7 @@
 FlowRouter.route('/', {
   name: 'home',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'home' });
+    this.render('layout', { content: 'home' });
   },
 });
 
@@ -29,55 +29,55 @@ FlowRouter.route('/', {
 FlowRouter.route('/my-feed', {
   name: 'myFeed',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'home' });
+    this.render('layout', { content: 'home' });
   },
 });
 
 FlowRouter.route('/register', {
   name: 'register',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'register' });
+    this.render('layout', { content: 'register' });
   },
 });
 
 FlowRouter.route('/login', {
   name: 'login',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'login' });
+    this.render('layout', { content: 'login' });
   },
 });
 
 FlowRouter.route('/settings', {
   name: 'settings',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'settings' });
+    this.render('layout', { content: 'settings' });
   },
 });
 
 FlowRouter.route('/profile/:username', {
   name: 'profile',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'profile' });
+    this.render('layout', { content: 'profile' });
   },
 });
 
 FlowRouter.route('/profile/:username/favorites', {
   name: 'profileFavorites',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'profile' });
+    this.render('layout', { content: 'profile' });
   },
 });
 
 FlowRouter.route('/editor/:slug?', {
   name: 'editor',
   action(/* params, queryParams */) {
-    BlazeLayout.render('layout', { content: 'editor' });
+    this.render('layout', { content: 'editor' });
   },
 });
 
 FlowRouter.route('/article/:slug', {
   name: 'article',
   action() {
-    BlazeLayout.render('layout', { content: 'article' });
+    this.render('layout', { content: 'article' });
   },
 });
