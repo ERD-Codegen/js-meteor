@@ -18,14 +18,14 @@ Meteor.publish('comments', (_id) => Comments.find({ articleId: _id }, { fields: 
 Meteor.publish('author', (_id) => Meteor.users.find({ _id }, { fields: { profile: 1, username: 1 } }));
 
 
-Meteor.publish('profileArticles', function (filter, offset) {
+Meteor.publish('profileArticles', async function (filter, offset) {
   check(filter, {
     username: String,
     favorites: Boolean,
   });
   check(offset, Number);
 
-  const user = Meteor.users.findOne({ username: filter.username }, { fields: { _id: 1 } });
+  const user = await Meteor.users.findOneAsync({ username: filter.username }, { fields: { _id: 1 } });
   if (!user) return this.ready();
 
   return Articles.find({ [filter.favorites ? 'favorites' : 'createdBy']: user._id }, {
@@ -46,7 +46,7 @@ Meteor.publish('profileArticles', function (filter, offset) {
 });
 
 
-Meteor.publish('articles', function (feed, offset) {
+Meteor.publish('articles', async function (feed, offset) {
   check(feed, String);
   check(offset, Number);
 
@@ -55,7 +55,9 @@ Meteor.publish('articles', function (feed, offset) {
 
   if (feed === 'mine') {
     if (!this.userId) return this.ready();
-    selector.createdBy = { $in: Meteor.users.find({ 'profile.followerIds': this.userId }).map((u) => u._id) };
+
+    const followedUserIds = await Meteor.users.find({ 'profile.followerIds': this.userId }).mapAsync((u) => u._id);
+    selector.createdBy = { $in: followedUserIds };
   } else if (feed !== 'global') {
     // it's a tag
     selector.tagList = feed;
